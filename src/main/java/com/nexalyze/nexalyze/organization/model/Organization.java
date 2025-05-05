@@ -14,6 +14,9 @@ public class Organization {
     @Column(name = TABLE_ORGANIZATION_COLUMN_LICENCE)
     private Integer licence;
 
+    @Column(name = TABLE_ORGANIZATION_COLUMN_TENANT_ID)
+    private Integer tenantId;
+
 
     public Organization(String name, Integer licence) {
         this.name = name;
@@ -41,5 +44,12 @@ public class Organization {
 
     public Long getId() {
         return id;
+    }
+
+    public Integer getTenantId() {
+        return tenantId;
+    }
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
     }
 }

@@ -16,7 +16,6 @@ public class DbConstants {
     public static final String TABLE_ORGANIZATION = "organizations";
     public static final String TABLE_ORGANIZATION_COLUMN_NAME = "name";
     public static final String TABLE_ORGANIZATION_COLUMN_LICENCE = "licence";
-
-
+    public static final String TABLE_ORGANIZATION_COLUMN_TENANT_ID = "tenant_id";
 
 }
