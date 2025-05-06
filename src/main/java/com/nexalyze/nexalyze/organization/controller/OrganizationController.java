@@ -1,5 +1,6 @@
 package com.nexalyze.nexalyze.organization.controller;
 
+import com.nexalyze.nexalyze.configuration.json.JsonObject;
 import com.nexalyze.nexalyze.organization.model.Organization;
 import com.nexalyze.nexalyze.organization.model.OrganizationModel;
 import com.nexalyze.nexalyze.organization.service.OrganizationService;
@@ -17,12 +18,17 @@ public class OrganizationController {
     OrganizationService organizationService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid OrganizationModel organizationModel) {
+    public ResponseEntity<JsonObject> create(@RequestBody @Valid OrganizationModel organizationModel) {
 
+        JsonObject response = new JsonObject();
         Organization organization = organizationService.createOrganization(organizationModel);
         if (organization == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There was a problem creating the organization.");
+            response.addError("There was a problem creating the organization.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body("The organization has been created.");
+        response.addMessage("The organization has been created.");
+        response.addId(organization.getTenantId());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
