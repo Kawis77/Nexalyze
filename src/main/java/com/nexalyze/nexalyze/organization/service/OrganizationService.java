@@ -5,9 +5,10 @@ import com.nexalyze.nexalyze.organization.model.OrganizationModel;
 import com.nexalyze.nexalyze.organization.repository.OrganizationRepository;
 import com.nexalyze.nexalyze.user.model.OrganizationUser;
 import com.nexalyze.nexalyze.user.repository.OrganizationUserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Log4j2
@@ -17,6 +18,8 @@ public class OrganizationService {
     private OrganizationRepository organizationRepository;
     @Autowired
     private OrganizationUserRepository organizationUserRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Organization createOrganization(OrganizationModel organizationModel) {
 
@@ -37,7 +40,7 @@ public class OrganizationService {
         OrganizationUser organizationUser = new OrganizationUser();
         organizationUser.setUsername(organizationModel.getUserName());
         organizationUser.setEmail(organizationModel.getEmail());
-        organizationUser.setPassword(organizationModel.getPassword());
+        organizationUser.setPassword(passwordEncoder.encode(organizationModel.getPassword()));
         organizationUser.setFirstname(organizationModel.getFirstName());
         organizationUser.setSurname(organizationModel.getSurname());
         organizationUser.setOrganizationId(organization.getId());

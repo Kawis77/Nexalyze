@@ -5,11 +5,16 @@ import com.nexalyze.nexalyze.user.repository.OrganizationUserRepository;
 import io.micrometer.common.util.StringUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Log4j2
 @Service
-public class OrganizationUserService {
+public class OrganizationUserService implements UserDetailsService {
     @Autowired
     private OrganizationUserRepository organizationUserRepository;
 
@@ -38,5 +43,23 @@ public class OrganizationUserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        OrganizationUser organizationUser = organizationUserRepository.findByUsername(username);
+        if (organizationUser == null) {
+            throw new UsernameNotFoundException("loadUserByUsername[0]: Problem with getting user. User witt username : " + username + " doesn't exist");
+        }
+        return organizationUser;
+    }
 
+
+    public OrganizationUser getByUsernameAndOrganizationId(String username, long organizationId) {
+        Optional<OrganizationUser> organizationUserOptional = organizationUserRepository.findByUsernameAndOrganizationId(username, organizationId);
+        if (organizationUserOptional.isEmpty()) {
+            log.debug("getByUsernameAndOrganizationId[0]: Problem with getting user. User witt username : " + username +
+                    " doesn't exist in organization with id: " + organizationId);
+            return null;
+        }
+        return organizationUserOptional.get();
+    }
 }

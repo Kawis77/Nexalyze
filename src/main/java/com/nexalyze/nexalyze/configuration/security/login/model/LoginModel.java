@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class LoginModel {
-
     @NotBlank(message = "Username must not be blank")
     private String username;
     @NotBlank(message = "Password must not be blank")
