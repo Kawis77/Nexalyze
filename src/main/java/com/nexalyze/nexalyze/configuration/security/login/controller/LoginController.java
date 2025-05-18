@@ -17,6 +17,7 @@ public class LoginController {
     private LoginService loginService;
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login (@RequestBody @Valid LoginModel loginModel){
+
         TokenResponse tokenResponse = loginService.login(loginModel);
 
         if (tokenResponse.getToken() == null){
@@ -24,4 +25,5 @@ public class LoginController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(tokenResponse);
     }
+
 }

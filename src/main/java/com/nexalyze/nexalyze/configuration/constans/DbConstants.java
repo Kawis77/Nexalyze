@@ -8,6 +8,7 @@ public class DbConstants {
     public static final String TABLE_USER_COLUMN_USERNAME = "username";
     public static final String TABLE_USER_COLUMN_SURNAME = "surname";
     public static final String TABLE_USER_COLUMN_FIRST_NAME = "firstname";
+    public static final String TABLE_USER_COLUMN_SECOND_NAME = "secondname";
     public static final String TABLE_USER_COLUMN_EMAIL = "email";
     public static final String TABLE_USER_COLUMN_PASSWORD = "password";
     public static final String TABLE_USER_COLUMN_ORGANIZATION_ID = "organization_id";
