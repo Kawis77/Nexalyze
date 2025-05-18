@@ -1,28 +1,14 @@
 package com.nexalyze.nexalyze.configuration.security.login.model;
 
-import io.micrometer.common.util.StringUtils;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class TokenResponse {
-
     private String token;
     private String message;
+    private String userFullName;
+    private int languageId;
 
-    public TokenResponse() {
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

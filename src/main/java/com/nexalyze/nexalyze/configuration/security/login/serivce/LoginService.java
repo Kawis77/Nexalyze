@@ -25,7 +25,6 @@ public class LoginService {
     @Autowired
     private JwtService jwtService;
 
-
     public TokenResponse login(LoginModel loginModel) {
         TokenResponse tokenResponse = new TokenResponse();
         Organization organization = organizationService.findByTenantId(loginModel.getTenantId());
@@ -53,6 +52,7 @@ public class LoginService {
 
         String token = jwtService.generateToken(authentication);
         tokenResponse.setToken(token);
+        tokenResponse.setUserFullName(organizationUser.getFirstname() + " " + organizationUser.getSurname());
 
         return tokenResponse;
     }

@@ -20,6 +20,8 @@ public class OrganizationUser implements UserDetails {
     private String password;
     @Column(name = TABLE_USER_COLUMN_FIRST_NAME)
     private String firstname;
+    @Column(name = TABLE_USER_COLUMN_SECOND_NAME)
+    private String secondname;
     @Column(name = TABLE_USER_COLUMN_SURNAME)
     private String surname;
     @Column(name = TABLE_USER_COLUMN_EMAIL)
@@ -94,6 +96,14 @@ public class OrganizationUser implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSecondname() {
+        return secondname;
+    }
+
+    public void setSecondname(String secondname) {
+        this.secondname = secondname;
     }
 
     @Override
